@@ -15,9 +15,10 @@ $ sudo apt install caddy
 
 ### Run Caddy server
 
-``bash
+```bash
 $ systemctl start caddy
-$ caddy run --environ --config ./Caddyfile  # Replace <domain_name> in Caddyfile with your domain's name
+$ caddy run --environ --config ./Caddyfile  # Replace <domain_name> in Caddyfile with your domain's name*
+# *you will need to point an A record on your domain provider's zone editor to the server's ip
 ```
 
 
