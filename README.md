@@ -25,5 +25,5 @@ $ caddy run --environ --config ./Caddyfile  # Replace <domain_name> in Caddyfile
 ## Run the container
 
 ```bash
-DOCKER_BUILDKIT=1 docker-compose up --detach
+DOCKER_BUILDKIT=1 docker-compose up --detach  # uncomment the image line and uncomment the build line if you don't have access to the private registry
 ```
