@@ -1,20 +1,28 @@
 # Streamlit-Docker-Pi
 Raspberry Pi, Docker, Streamlit, Poetry
 
-Was having a hard time deploying Streamlit to the Pi4, decided to give docker a try. Takes about 50minutes on a Pi4 to initially build.
+## SSL-proxy (optional)
 
-### Install:
-* git clone this repo
-* docker-compose up --build
-> Wait, then continue to wait, finally still wait...
-* Visit your Pi's IP address (e.g. 192.168.1.11:8501)
-* Profit 
+### Install Caddy
 
-### Future updates could include:
-* ~~Multi-Stageing to reduce overall size~~
-* /Wheel/ to reduce rebuild time
-* ~~.Venv.. Maybe.. Because.. Pi~~ Via poetry and multi-stage
+```bash
+$ sudo apt install -y debian-keyring debian-archive-keyring apt-transport-https
+$ curl -1sLf 'https://dl.cloudsmith.io/public/caddy/stable/gpg.key' | sudo tee /etc/apt/trusted.gpg.d/caddy-stable.asc
+$ curl -1sLf 'https://dl.cloudsmith.io/public/caddy/stable/debian.deb.txt' | sudo tee /etc/apt/sources.list.d/caddy-stable.list
+$ sudo apt update
+$ sudo apt install caddy
+```
 
-### Tested on
-* Arm8/Arm7 DietPi Pi4 8gb
-* Docker 19.03.0+
+### Run Caddy server
+
+``bash
+$ systemctl start caddy
+$ caddy run --environ --config ./Caddyfile  # Replace <domain_name> in Caddyfile with your domain's name
+```
+
+
+## Run the container
+
+```bash
+DOCKER_BUILDKIT=1 docker-compose up --detach
+```
